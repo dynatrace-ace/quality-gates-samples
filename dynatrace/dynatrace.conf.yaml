@@ -1,0 +1,41 @@
+# This file is used by the Dynatrace service to send events 
+# (Deployment, Test Start/Stop, Quality Gates result) to entities in Dynatrace
+# It is possible to use the following placeholders:
+#   $SERVICE, $PROJECT, $STAGE
+#   $LABEL.[labelname]: any label that was added to the deployment-finished or start-evaluation events
+# More info: https://github.com/keptn-contrib/dynatrace-service
+# Use the Dynatrace API docs for guidance: https://www.dynatrace.com/support/help/dynatrace-api/environment-api/events/post-event/#events-post-parameter-pusheventattachrules
+
+# Example one: standard match with a SERVICE that is tagged with all 3 keptn tags
+---
+spec_version: '0.1.0'
+dtCreds: dynatrace
+attachRules:
+  tagRule:
+  - meTypes:
+    - SERVICE
+    tags:
+    - context: CONTEXTLESS
+      key: keptn_service
+      value: $SERVICE
+    - context: CONTEXTLESS
+      key: keptn_stage
+      value: $STAGE
+    - context: CONTEXTLESS
+      key: keptn_project
+      value: $PROJECT
+
+# Example two: use the label field to match and only provide a key for the tag 
+---
+spec_version: '0.1.0'
+dtCreds: dynatrace
+attachRules:
+  tagRule:
+    meTypes:
+    - PROCESS_GROUP
+    tags:
+    - context: CONTEXTLESS
+      key: $PROJECT
+    - context: CONTEXTLESS
+      key: environment
+      value: $LABEL.environment
