@@ -1,0 +1,17 @@
+---
+spec_version: '1.0'
+indicators:
+  #example of a base metric filtered tags using keptn's $PROJECT, $SERVICE, $STAGE placeholders
+  throughput:          "metricSelector=builtin:service.requestCount.total:merge(0):sum&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE)),tag(keptn_service:$SERVICE),type(SERVICE)"
+  error_rate:          "metricSelector=builtin:service.errors.total.count:merge(0):avg&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(SERVICE)"
+  #example of a percentile aggregation
+  response_time_p95:   "metricSelector=builtin:service.response.time:merge(0):percentile(95)&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(SERVICE)"
+  #example for a calculated service metric filtered by a dimension called "method" with a value of "/api/invoke"
+  rt_invokeapi:        "metricSelector=calc:service.simplenode.staging:filter(eq(method,/api/invoke)):merge(0):percentile(95)&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(SERVICE)"
+  #example with a metric for an entityType of Process Group Instance
+  pg_heap_suspension:  "metricSelector=builtin:tech.jvm.memory.gc.suspensionTime:merge(0):max&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(PROCESS_GROUP_INSTANCE)"
+  pg_cpu_usage:        "metricSelector=builtin:tech.generic.cpu.usage:merge(0):max&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(PROCESS_GROUP_INSTANCE)"
+  # todo: example with tag context of KUBERNETES
+  # todo: example with keptn label
+  # todo: example with key request
+  # todo: example with fixed entity  
