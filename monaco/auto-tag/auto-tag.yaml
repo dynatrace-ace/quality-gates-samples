@@ -1,0 +1,15 @@
+config:
+    - environment: "auto-tag.json"
+    - app: "auto-tag.json"
+
+# Creates a tag called "environment" using the kubernetes namespace  
+environment:
+    - name: "environment"
+    - valueFormat: "{ProcessGroup:KubernetesNamespace}"
+    - dynamicKey: "KUBERNETES_NAMESPACE"
+
+# Creates a tag called "app" using the kubernetes container name
+app:
+    - name: "app"
+    - valueFormat: "{ProcessGroup:KubernetesContainerName}"
+    - dynamicKey: "KUBERNETES_CONTAINER_NAME"
