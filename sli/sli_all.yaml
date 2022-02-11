@@ -11,7 +11,13 @@ indicators:
   #example with a metric for an entityType of Process Group Instance
   pg_heap_suspension:  "metricSelector=builtin:tech.jvm.memory.gc.suspensionTime:merge(0):max&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(PROCESS_GROUP_INSTANCE)"
   pg_cpu_usage:        "metricSelector=builtin:tech.generic.cpu.usage:merge(0):max&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(PROCESS_GROUP_INSTANCE)"
+  #appsec sample for specific PGIs
+  app_sec_high:        "SECPV2;securityProblemSelector=riskLevel(HIGH),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"
+  app_sec_critical:    "SECPV2;securityProblemSelector=riskLevel(CRITICAL),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"
+  app_sec_medium:      "SECPV2;securityProblemSelector=riskLevel(MEDIUM),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"
+  app_sec_low:         "SECPV2;securityProblemSelector=riskLevel(LOW),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"
   # todo: example with tag context of KUBERNETES
-  # todo: example with keptn label
+  # example using labels
+  rt_95_label:         "metricSelector=builtin:service.response.time:merge(\"dt.entity.service\"):percentile(95)&entitySelector=tag([ENVIRONMENT]DT_RELEASE_VERSION:$LABEL.DT_RELEASE_VERSION),tag([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION),tag([ENVIRONMENT]DT_RELEASE_STAGE:$LABEL.DT_RELEASE_STAGE),tag([ENVIRONMENT]DT_RELEASE_PRODUCT:$LABEL.DT_RELEASE_PRODUCT),type(SERVICE)"
   # todo: example with key request
   # todo: example with fixed entity  

@@ -1,0 +1,10 @@
+config:
+  - qualitygatedashboard: "qgdashboard.json"
+  
+qualitygatedashboard:
+  - name: "KQG;project=YOURPROJECT;service=YOURSERVICE;stage=YOURSTAGE"
+  - project: "YOURPROJECT"
+  - stage: "YOURSTAGE"
+  - service: "YOURSERVICE"  
+  - owner: "YOURDTLOGIN"
+  - bridge: "https://abc12345.cloudautomation.live.dynatrace.com/bridge"

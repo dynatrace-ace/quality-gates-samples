@@ -1,0 +1,9 @@
+# This is a base shipyard file used for quality gates that defines two stages: staging and qa
+---
+apiVersion: "spec.keptn.sh/0.2.0"
+kind: "Shipyard"
+metadata:
+  name: "shipyard-myproject"
+spec:
+  stages:
+    - name: "security-gate"

@@ -1,0 +1,8 @@
+---
+spec_version: '1.0'
+indicators:
+  #appsec sample for specific PGI. NOTE: this relies on DT_RELEASE_BUILD_VERSION being set on the PGI https://www.dynatrace.com/support/help/how-to-use-dynatrace/cloud-automation/release-monitoring/version-detection-strategies
+  app_sec_high:        "SECPV2;securityProblemSelector=riskLevel(HIGH),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"
+  app_sec_critical:    "SECPV2;securityProblemSelector=riskLevel(CRITICAL),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"
+  app_sec_medium:      "SECPV2;securityProblemSelector=riskLevel(MEDIUM),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"
+  app_sec_low:         "SECPV2;securityProblemSelector=riskLevel(LOW),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"

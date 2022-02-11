@@ -1,0 +1,36 @@
+---
+spec_version: "0.1.1"
+comparison:
+  aggregate_function: "avg"
+  compare_with: "single_result"
+  include_result_with_score: "pass"
+  number_of_comparison_results: 1
+filter:
+objectives:
+  # It is not allowed to introduce HIGH level vulnerabilities
+  - sli: "app_sec_high"
+    displayName: "Security Vulnerabilities - High"
+    pass:
+    - criteria:
+      - <=0
+    key_sli: true
+  # It is not allowed to introduce CRITICAL level vulnerabilities
+  - sli: "app_sec_critical"
+    displayName: "Security Vulnerabilities - Critical"
+    pass:
+    - criteria:
+      - <=0
+    key_sli: true
+  # It is not allowed to introduce ADDITIONAL MEDIUM level vulnerabilities
+  - sli: "app_sec_medium"
+    displayName: "Security Vulnerabilities - Medium"
+    key_sli: false
+    pass:
+    - criteria:
+      - <=+1
+  # No criteria set for LOW level vulnerabilities, informational only
+  - sli: "app_sec_low"
+    displayName: "Security Vulnerabilities - Low"
+total_score:
+  pass: "90%"
+  warning: "75%"

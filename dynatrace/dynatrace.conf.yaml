@@ -9,7 +9,7 @@
 # Example one: standard match with a SERVICE that is tagged with all 3 keptn tags
 ---
 spec_version: '0.1.0'
-dtCreds: dynatrace
+dtCreds: dynatrace # name of secret that contains Dynatrace tenant url and API token
 attachRules:
   tagRule:
   - meTypes:
@@ -28,7 +28,7 @@ attachRules:
 # Example two: use the label field to match and only provide a key for the tag 
 ---
 spec_version: '0.1.0'
-dtCreds: dynatrace
+dtCreds: someSecretName
 attachRules:
   tagRule:
     meTypes:
@@ -39,3 +39,66 @@ attachRules:
     - context: CONTEXTLESS
       key: environment
       value: $LABEL.environment
+
+
+# Example three: use a fixed dashboard for SLI and SLO definition
+---
+spec_version: '0.1.0'
+dtCreds: dynatrace # name of secret that contains Dynatrace tenant url and API token
+dashboard: 7adf8939-895e-471d-9fd2-6048f5292209
+attachRules:
+  tagRule:
+  - meTypes:
+    - SERVICE
+    tags:
+    - context: CONTEXTLESS
+      key: keptn_service
+      value: $SERVICE
+    - context: CONTEXTLESS
+      key: keptn_stage
+      value: $STAGE
+    - context: CONTEXTLESS
+      key: keptn_project
+      value: $PROJECT
+
+# Example three: use a fixed dashboard for SLI and SLO definition
+---
+spec_version: '0.1.0'
+dtCreds: dynatrace # name of secret that contains Dynatrace tenant url and API token
+dashboard: query
+attachRules:
+  tagRule:
+  - meTypes:
+    - SERVICE
+    tags:
+    - context: CONTEXTLESS
+      key: keptn_service
+      value: $SERVICE
+    - context: CONTEXTLESS
+      key: keptn_stage
+      value: $STAGE
+    - context: CONTEXTLESS
+      key: keptn_project
+      value: $PROJECT
+
+# Example: send events to Process Group Instances
+---
+spec_version: '0.1.0'
+dtCreds: dynatrace
+attachRules:
+  tagRule:
+  - meTypes:
+    - PROCESS_GROUP_INSTANCE
+    tags:
+    - context: ENVIRONMENT
+      key: DT_RELEASE_BUILD_VERSION
+      value: $LABEL.DT_RELEASE_BUILD_VERSION
+    - context: KUBERNETES
+      key: app.kubernetes.io/name
+      value: $SERVICE
+    - context: KUBERNETES
+      key: app.kubernetes.io/part-of
+      value: $LABEL.DT_RELEASE_PRODUCT
+    - context: KUBERNETES
+      key: app.kubernetes.io/component
+      value: api
