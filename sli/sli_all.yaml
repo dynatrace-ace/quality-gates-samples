@@ -1,23 +1,26 @@
 ---
 spec_version: '1.0'
 indicators:
-  #example of a base metric filtered tags using keptn's $PROJECT, $SERVICE, $STAGE placeholders
-  throughput:          "metricSelector=builtin:service.requestCount.total:merge(0):sum&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE)),tag(keptn_service:$SERVICE),type(SERVICE)"
-  error_rate:          "metricSelector=builtin:service.errors.total.count:merge(0):avg&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(SERVICE)"
+  #example of a base metric filtered by a simple tag without a value
+  throughput:          "metricSelector=builtin:service.requestCount.total:merge(\"dt.entity.service\"):sum&entitySelector=tag(MYTARGETSERVICE),type(SERVICE)"
+  #example of a base metric filtered by a key-value tag
+  error_rate:          "metricSelector=builtin:service.errors.total.count:merge(\"dt.entity.service\"):avg&entitySelector=tag(project:MYPROJECT),type(SERVICE)"
   #example of a percentile aggregation
-  response_time_p95:   "metricSelector=builtin:service.response.time:merge(0):percentile(95)&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(SERVICE)"
+  response_time_p95:   "metricSelector=builtin:service.response.time:merge(\"dt.entity.service\"):percentile(95)&entitySelector=tag(project:MYPROJECT),type(SERVICE)"
+  #example of a percentile using the Cloud Automation placeholders
+  response_time_p95_ph: "metricSelector=builtin:service.response.time:merge(\"dt.entity.service\"):percentile(95)&entitySelector=tag(project:$PROJECT),tag(service:$SERVICE),tag(stage:$STAGE),type(SERVICE)"
   #example for a calculated service metric filtered by a dimension called "method" with a value of "/api/invoke"
-  rt_invokeapi:        "metricSelector=calc:service.simplenode.staging:filter(eq(method,/api/invoke)):merge(0):percentile(95)&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(SERVICE)"
+  rt_invokeapi:        "metricSelector=calc:service.simplenode.staging:filter(eq(method,/api/invoke)):merge(\"dt.entity.service\"):percentile(95)&entitySelector=tag(project:MYPROJECT),type(SERVICE)"
   #example with a metric for an entityType of Process Group Instance
-  pg_heap_suspension:  "metricSelector=builtin:tech.jvm.memory.gc.suspensionTime:merge(0):max&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(PROCESS_GROUP_INSTANCE)"
-  pg_cpu_usage:        "metricSelector=builtin:tech.generic.cpu.usage:merge(0):max&entitySelector=tag(keptn_project:$PROJECT),tag(keptn_stage:$STAGE),tag(keptn_service:$SERVICE),type(PROCESS_GROUP_INSTANCE)"
+  pg_heap_suspension:  "metricSelector=builtin:tech.jvm.memory.gc.suspensionTime:merge(\"dt.entity.process_group_instance\"):max&entitySelector=tag(project:MYPROJECT),type(PROCESS_GROUP_INSTANCE)"
+  pg_cpu_usage:        "metricSelector=builtin:tech.generic.cpu.usage:merge(\"dt.entity.process_group_instance\"):max&entitySelector=tag(project:MYPROJECT),type(PROCESS_GROUP_INSTANCE)"
   #appsec sample for specific PGIs
   app_sec_high:        "SECPV2;securityProblemSelector=riskLevel(HIGH),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"
   app_sec_critical:    "SECPV2;securityProblemSelector=riskLevel(CRITICAL),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"
   app_sec_medium:      "SECPV2;securityProblemSelector=riskLevel(MEDIUM),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"
   app_sec_low:         "SECPV2;securityProblemSelector=riskLevel(LOW),pgiTags([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION)"
   # todo: example with tag context of KUBERNETES
-  # example using labels
+  # example using Cloud Automation labels
   rt_95_label:         "metricSelector=builtin:service.response.time:merge(\"dt.entity.service\"):percentile(95)&entitySelector=tag([ENVIRONMENT]DT_RELEASE_VERSION:$LABEL.DT_RELEASE_VERSION),tag([ENVIRONMENT]DT_RELEASE_BUILD_VERSION:$LABEL.DT_RELEASE_BUILD_VERSION),tag([ENVIRONMENT]DT_RELEASE_STAGE:$LABEL.DT_RELEASE_STAGE),tag([ENVIRONMENT]DT_RELEASE_PRODUCT:$LABEL.DT_RELEASE_PRODUCT),type(SERVICE)"
   # todo: example with key request
   # todo: example with fixed entity  
