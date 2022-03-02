@@ -1,0 +1,5 @@
+---
+spec_version: '1.0'
+indicators:
+  e2e_page_load: "USQL;COLUMN_CHART;Page load;SELECT syntheticEvent, duration FROM useraction WHERE usersession.internalUserId=\"$LABEL.INTERNAL_USER_ID\""
+  e2e_version: "USQL;COLUMN_CHART;Version;SELECT syntheticEvent, duration FROM useraction WHERE usersession.internalUserId=\"$LABEL.INTERNAL_USER_ID\""
